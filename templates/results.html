@@ -1,0 +1,19 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="static/ridestats.css">
+</head>
+<body>
+	<div class="splash-container">
+		<div class="splash">
+			<h1 class="splash-head">You have taken {{ride_count}} rides and used uber in {{cities_count}} 
+				{% if cities_count < 2 %} 
+					city.
+				{% else %}
+					cities.
+				{% endif %}
+				</h1>
+		</div>
+	</div>
+</body>
+</html>
