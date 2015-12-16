@@ -6,14 +6,25 @@
 <body>
 	<div class="splash-container">
 		<div class="splash">
+			<h1>{{firstname}} {{lastname}}</h1>
+			<h3>Use my promo code {{promocode}} to signup for Uber and get $20</h3>
 			<h1 class="splash-head">You have taken {{ride_count}} rides and used uber in {{cities_count}} 
-				{% if cities_count < 2 %} 
-					city.
-				{% else %}
-					cities.
-				{% endif %}
+					{% if cities_count < 2 %} 
+						city.
+					{% else %}
+						cities.
+					{% endif %}
+
+				You have travelled {{total_distance}} kms. You have spent {{waittime}} hours waiting for your rides to arrive and {{trip_time}} in Uber rides! 
+				
 				</h1>
 		</div>
+		<dl>
+		      {% for key, value in products.iteritems() %}
+		            <dt>{{ key }}</dt>
+		            <dd>{{ value }}</dd>
+		      {% endfor %}
+		</dl>
 	</div>
 </body>
 </html>
