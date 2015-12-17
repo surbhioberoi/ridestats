@@ -1,3 +1,4 @@
+import base64
 from flask import Flask, request, render_template
 from uber_rides.auth import AuthorizationCodeGrant
 from uber_rides.client import UberRidesClient
@@ -18,6 +19,8 @@ auth_url = auth_flow.get_authorization_url()
 
 
 app = Flask(__name__)
+
+float_format = lambda x: float("{0:.2f}".format(x))
 
 @app.route("/")
 def hello():
@@ -77,23 +80,52 @@ def post_login():
 		except:
 		 	pass
 
-	print uber_products
+	"Surbhi|Oberoi|PS| uberGO|3|uberX|0|uberXL|1|PE|4|1|58.01|1.55|4.5"
 
-	float_format = lambda x: float("{0:.2f}".format(x))
+	data = [first_name, last_name, "PS",]
+	for i in uber_products:
+		data.append(i)
+		data.append(uber_products[i])
+
+	data.extend(["PE", ride_count, len(cities), total_distance, wait_time, trip_time])
+
+	encoded_data = base64.b64encode("|".join(map(lambda x: str(x), data)))
+
+	shareurl = "http://localhost:5000/result/" + encoded_data
 
 	return render_template('results.html',
 						   ride_count=ride_count,
 						   cities_count=len(cities),
 						   firstname=first_name,
 						   lastname=last_name,
-						   promocode=promo_code,
 						   products=uber_products,
 						   total_distance=float_format(total_distance*1.60934),
 						   waittime=float_format(wait_time),
-						   trip_time=float_format(trip_time))
+						   trip_time=float_format(trip_time),
+						   fblink=shareurl)
+
+
+@app.route("/result/<string:hashed>")
+def shareurl(hashed):
+	data = base64.b64decode(hashed).split('|')
+	products_start = data.index("PS") + 1
+	products_end = data.index("PE")
+	uber_products = {}
+	for i in range(products_start, products_end-1, 2):
+		uber_products[data[i]] = data[i+1]
+
+	return render_template('results.html',
+						   ride_count=int(data[products_end+1]),
+						   cities_count=int(data[products_end+2]),
+						   firstname=data[0],
+						   lastname=data[1],
+						   products=uber_products,
+						   total_distance=float_format(float(data[products_end+3])*1.60934),
+						   waittime=float_format(float(data[products_end+4])),
+						   trip_time=float_format(float(data[products_end+5])))
 
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run(host='0.0.0.0', debug=True)
 
