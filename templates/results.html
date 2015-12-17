@@ -5,26 +5,58 @@
 </head>
 <body>
 	<div class="splash-container">
-		<div class="splash">
-			<h1>{{firstname}} {{lastname}}</h1>
-			<h3>Use my promo code {{promocode}} to signup for Uber and get $20</h3>
-			<h1 class="splash-head">You have taken {{ride_count}} rides and used uber in {{cities_count}} 
-					{% if cities_count < 2 %} 
-						city.
-					{% else %}
-						cities.
-					{% endif %}
+		<div class="resultarea">
 
-				You have travelled {{total_distance}} kms. You have spent {{waittime}} hours waiting for your rides to arrive and {{trip_time}} in Uber rides! 
-				
-				</h1>
+
+			<div class="pure-g">
+			    <div class="pure-u-1-2">
+			    	<h1>{{firstname}} {{lastname}}</h1>
+			    </div>
+			    <div class="pure-u-1-2">
+			    	<h3>Use my promo code {{promocode}} to signup for Uber and get $20</h3>
+			    </div>
+			</div>
+
+
+			<div class="pure-g">
+			    <div class="pure-u-1-3">
+			    	<h1 class="splash-head">{{ride_count}} rides.</h1>
+			    </div>
+			    <div class="pure-u-1-3"> 
+			    	<h1 class="splash-head">{{cities_count}} 
+				    {% if cities_count < 2 %} 
+					city.
+					{% else %}
+					cities.
+					{% endif %} </h1>
+				</div>
+			    <div class="pure-u-1-3">
+			    	<h1 class="splash-head">Travelled {{total_distance}} kms.</h1>
+			    </div>
+			</div>
+
+
+			<div class="pure-g">
+			    <div class="pure-u-1-2">
+			    	<h1 class="splash-head">{{waittime}} hours waiting</h1>
+			    </div>
+			    <div class="pure-u-1-2">
+			    	<h1 class="splash-head">{{trip_time}} hours in Uber</h1>
+			    </div>
+			</div>
+
+
+			<div class="pure-g">
+				<div class="pure-u-5-5">
+					<h1 class="splash-head">
+							{% for key, value in products.iteritems() %}
+								{{ key }}: {{ value }} <br>
+							{% endfor %}
+					</h1>
+				</div>
+			</div>
+
 		</div>
-		<dl>
-		      {% for key, value in products.iteritems() %}
-		            <dt>{{ key }}</dt>
-		            <dd>{{ value }}</dd>
-		      {% endfor %}
-		</dl>
 	</div>
 </body>
 </html>

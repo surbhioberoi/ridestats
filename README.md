@@ -7,6 +7,4 @@ An app to view cool stats about your Uber rides
 * Kilometers travelled in Uber.
 * Total time spent waiting for an Uber.
 * Total time spent in an Uber.
-* Map displaying cities travelled along with the count of rides taken in each.
-
   

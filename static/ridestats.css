@@ -23,6 +23,12 @@
     text-transform: uppercase;
 }
 
+.resultarea {
+     width: 80%;
+     margin: auto;
+     text-align: center;
+}
+
 /* This is the main heading that appears on the blue section */
 .splash-head {
     font-size: 20px;
@@ -46,3 +52,8 @@
 a {
     text-decoration: none;
 }
+
+#map {
+        height: 80%;
+        width: 400px;
+      }
