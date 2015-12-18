@@ -9,3 +9,6 @@ An app to view cool stats about your Uber rides
 * Total time spent in an Uber.
   
 You can use this app and check your own cool stats, results can also be shared on facebook. 
+
+I have blogged about creating this app at 
+http://surbhioberoi.com/a-literature-geek-learns-to-code/
