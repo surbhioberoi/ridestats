@@ -1,5 +1,5 @@
 import base64
-from flask import Flask, request, render_template
+from flask import Flask, request, redirect, render_template
 from uber_rides.auth import AuthorizationCodeGrant
 from uber_rides.client import UberRidesClient
 import json
@@ -8,7 +8,7 @@ from collections import defaultdict
 CLIENT_ID = "TmORsdHDdk3GgGx3bBCE_Jh5EzaDbPKc"
 CLIENT_SECRET = "dsPSgtSom4xyqgu8QcP-RPZ_DDju-pP-OKQdtMtW"
 PERMISSION_SCOPES = {"profile", "history"}
-REDIRECT_URL = "http://localhost:5000/loggedIn"
+REDIRECT_URL = "https://ridestats.surbhioberoi.com/loggedIn"
 
 auth_flow = AuthorizationCodeGrant(CLIENT_ID,
 				   PERMISSION_SCOPES,
@@ -80,8 +80,6 @@ def post_login():
 		except:
 		 	pass
 
-	"Surbhi|Oberoi|PS| uberGO|3|uberX|0|uberXL|1|PE|4|1|58.01|1.55|4.5"
-
 	data = [first_name, last_name, "PS",]
 	for i in uber_products:
 		data.append(i)
@@ -91,18 +89,9 @@ def post_login():
 
 	encoded_data = base64.b64encode("|".join(map(lambda x: str(x), data)))
 
-	shareurl = "http://localhost:5000/result/" + encoded_data
-
-	return render_template('results.html',
-						   ride_count=ride_count,
-						   cities_count=len(cities),
-						   firstname=first_name,
-						   lastname=last_name,
-						   products=uber_products,
-						   total_distance=float_format(total_distance*1.60934),
-						   waittime=float_format(wait_time),
-						   trip_time=float_format(trip_time),
-						   fblink=shareurl)
+	shareurl = "https://ridestats.surbhioberoi.com/result/" + encoded_data
+	
+	return redirect(shareurl)
 
 
 @app.route("/result/<string:hashed>")
@@ -122,10 +111,11 @@ def shareurl(hashed):
 						   products=uber_products,
 						   total_distance=float_format(float(data[products_end+3])*1.60934),
 						   waittime=float_format(float(data[products_end+4])),
-						   trip_time=float_format(float(data[products_end+5])))
+						   trip_time=float_format(float(data[products_end+5])),
+						   fblink="https://ridestats.surbhioberoi.com" + request.path)
 
 
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', debug=True)
+	app.run(host='0.0.0.0', port=4000, debug=True)
 
