@@ -1,5 +1,14 @@
-# ridestats http://ridestats.surbhioberoi.com
-An app to view cool stats about your Uber rides
+# ridestats 
+
+> A web app for cool stats about your Uber rides
+
+![demo](media/demo1.png)
+
+## Try it
+
+http://ridestats.surbhioberoi.com
+
+## Displayed Information
 
 * Name of the account holder.
 * Number of cities where Uber was used.
