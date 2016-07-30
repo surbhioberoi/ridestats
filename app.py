@@ -5,8 +5,8 @@ from uber_rides.client import UberRidesClient
 import json
 from collections import defaultdict
 
-CLIENT_ID = "TmORsdHDdk3GgGx3bBCE_Jh5EzaDbPKc"
-CLIENT_SECRET = "dsPSgtSom4xyqgu8QcP-RPZ_DDju-pP-OKQdtMtW"
+CLIENT_ID = "<YOUR_CLIENT_ID"
+CLIENT_SECRET = "<YOUR_CLIENT_SECRET>"
 PERMISSION_SCOPES = {"profile", "history"}
 REDIRECT_URL = "https://ridestats.surbhioberoi.com/loggedIn"
 
